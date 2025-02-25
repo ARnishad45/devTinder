@@ -1,6 +1,6 @@
 const validator = require("validator");
 
-const validatorFunction = (req) => {
+const validatorFunction = (req, res) => {
     const {firstName, lastName, password, email, phoneNumber} = req.body;
 
     // console.log("Validator running: " + firstName, lastName, password, email, phoneNumber);
@@ -28,4 +28,14 @@ const validatorFunction = (req) => {
     }
 }
 
-module.exports = {validatorFunction};
+const validateEditRequest = async (req) => {
+    const AllowedEditFields = ["firstName", "lastName", "phoneNumber", "age", "gender", "skills", "photoUrl"]
+
+   const isEditAllowed = Object.keys(req.body).every((field) => AllowedEditFields.includes(field))
+
+   console.log(isEditAllowed);
+
+   return isEditAllowed;
+};
+
+module.exports = {validatorFunction, validateEditRequest};
