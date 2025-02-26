@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema({
         type : 'string',
         required : true,
         minLength : 3,
-        maxLength : 50
+        maxLength : 50,
+        index: true, //makes querry faster
     },
     lastName : {
         type : 'string',
@@ -68,6 +69,9 @@ const userSchema = new mongoose.Schema({
     timestamps: true,
 }
 );
+
+userSchema.index({firstName: 1, lastName: 1});
+userSchema.index({gender: 1});
 
 userSchema.methods.getJWT = async function(){
     const user = this;
