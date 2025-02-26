@@ -23,7 +23,9 @@ const connectionRequestSchema = new mongoose.Schema({
 }
 );
 
-connectionRequestSchema.pre("save", function() {
+connectionRequestSchema.index({fromUserId: 1, toUserId: 1}); //compound index for making query very fast
+
+connectionRequestSchema.pre("save", function(next) {
     const connectionRequest = this;
     //check for user(before saving) can't send request to itself
     if(connectionRequest.fromUserId.equals(connectionRequest.toUserId)){
