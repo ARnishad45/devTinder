@@ -65,7 +65,7 @@ requestRouter.post(
   }
 );
 
-requestRouter.post("/request/review/:status/:toUserId", userAuth, async (req, res) => {
+requestRouter.post("/request/review/:status/:requestId", userAuth, async (req, res) => {
   try{
     const loggedInUser = req.user;
     const {status, requestId} = req.params;
@@ -81,7 +81,7 @@ requestRouter.post("/request/review/:status/:toUserId", userAuth, async (req, re
     const connectionRequest = await ConnectionRequest.findOne({
       _id: requestId,
       toUserId: loggedInUser._id,
-      status: "interested"
+      status: "interested" //only interested requestes can be accepted
     });
     if(!connectionRequest){
       return res.status(400).json({message: "Connection request not found"});
@@ -89,8 +89,8 @@ requestRouter.post("/request/review/:status/:toUserId", userAuth, async (req, re
     //loggedInUser = toUserId
 
     connectionRequest.status = status;
-
-    const data = await ConnectionRequest.save;
+    
+    const data = await connectionRequest.save();
 
     res.json({message: "Connection request "+ status, data});
   }
