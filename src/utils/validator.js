@@ -33,7 +33,7 @@ const validateEditRequest = async (req) => {
 
    const isEditAllowed = Object.keys(req.body).every((field) => AllowedEditFields.includes(field))
 
-   console.log(isEditAllowed);
+//    console.log(isEditAllowed);
 
    return isEditAllowed;
 };
