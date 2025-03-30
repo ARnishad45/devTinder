@@ -29,7 +29,7 @@ const validatorFunction = (req, res) => {
 }
 
 const validateEditRequest = async (req) => {
-    const AllowedEditFields = ["firstName", "lastName", "phoneNumber", "age", "gender", "skills", "photoUrl"]
+    const AllowedEditFields = ["firstName", "lastName", "phoneNumber", "age", "gender", "skills", "photoUrl", "about"]
 
    const isEditAllowed = Object.keys(req.body).every((field) => AllowedEditFields.includes(field))
 
