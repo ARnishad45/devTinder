@@ -45,7 +45,7 @@ const userSchema = new mongoose.Schema({
     },
     photoUrl : {
         type : 'string',
-        default : 'http://dummy.profile.com/photo.jpeg',
+        default : 'https://static.vecteezy.com/system/resources/previews/003/715/527/non_2x/picture-profile-icon-male-icon-human-or-people-sign-and-symbol-vector.jpg',
         validate (value) {
             if(!validator.isURL(value)){
                 throw new Error("Invalid photo url: ")
@@ -61,7 +61,7 @@ const userSchema = new mongoose.Schema({
         //     }
         // }
         enum: {
-            values: ["male", "female", "other"],
+            values: ["male", "Male", "Female", "female", "other"],
             message: `{VALUE} is incorrect gender`
         }
     },
